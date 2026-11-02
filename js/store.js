@@ -1,8 +1,9 @@
-const PREFIX = "taskora_";
+ const PREFIX = "taskora_";
 
 export const store = {
   getUsers() { return JSON.parse(localStorage.getItem(PREFIX + "users") || "[]"); },
   saveUsers(users) { localStorage.setItem(PREFIX + "users", JSON.stringify(users)); },
+  
   getCurrentUser() {
     const email = localStorage.getItem(PREFIX + "current");
     if (!email) return null;
@@ -13,17 +14,26 @@ export const store = {
 
   signup(name, email, password) {
     const users = this.getUsers();
-    if (users.find(u => u.email === email)) throw new Error("Email already registered");
-    const user = { name, email, password, id: Date.now().toString() };
+    const cleanEmail = email.trim().toLowerCase();
+    
+    if (users.find(u => u.email === cleanEmail)) throw new Error("Email already registered");
+    
+    const user = { name, email: cleanEmail, password: password.trim(), id: Date.now().toString() };
     users.push(user);
     this.saveUsers(users);
-    this.setCurrentUser(email);
+    this.setCurrentUser(cleanEmail);
     return user;
   },
+
   login(email, password) {
-    const user = this.getUsers().find(u => u.email === email && u.password === password);
+    const cleanEmail = email.trim().toLowerCase();
+    const cleanPassword = password.trim();
+
+    const user = this.getUsers().find(u => u.email === cleanEmail && u.password === cleanPassword);
+    
     if (!user) throw new Error("Invalid email or password");
-    this.setCurrentUser(email);
+    
+    this.setCurrentUser(cleanEmail);
     return user;
   },
 
@@ -34,6 +44,7 @@ export const store = {
   get(bucket) { return JSON.parse(localStorage.getItem(this._key(bucket)) || "[]"); },
   set(bucket, data) { localStorage.setItem(this._key(bucket), JSON.stringify(data)); },
 
+  // --- TASKS ---
   addTask(task) {
     const tasks = this.get("tasks");
     tasks.push({ id: Date.now().toString(), completed: false, completedAt: null, createdAt: new Date().toISOString(), ...task });
@@ -54,6 +65,7 @@ export const store = {
   },
   deleteTask(id) { this.set("tasks", this.get("tasks").filter(t => t.id !== id)); },
 
+  // --- SCHEDULE ---
   addSchedule(item) {
     const items = this.get("schedule");
     items.push({ id: Date.now().toString(), ...item });
@@ -61,6 +73,7 @@ export const store = {
   },
   deleteSchedule(id) { this.set("schedule", this.get("schedule").filter(s => s.id !== id)); },
 
+  // --- JOURNAL ---
   addJournal(entry) {
     const items = this.get("journal");
     items.unshift({ id: Date.now().toString(), date: new Date().toISOString().split("T")[0], ...entry });

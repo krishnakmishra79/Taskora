@@ -1,4 +1,4 @@
-import { store } from "./store.js";
+ import { store } from "./store.js";
 
 const loginForm = document.getElementById("loginForm");
 const signupForm = document.getElementById("signupForm");
@@ -30,8 +30,8 @@ loginForm.onsubmit = (e) => {
   e.preventDefault();
   try {
     store.login(
-      document.getElementById("loginEmail").value.trim(),
-      document.getElementById("loginPassword").value
+      document.getElementById("loginEmail").value.trim(), 
+      document.getElementById("loginPassword").value.trim()
     );
     window.location.href = "dashboard.html";
   } catch (err) { showError(err.message); }
@@ -43,7 +43,7 @@ signupForm.onsubmit = (e) => {
     store.signup(
       document.getElementById("signupName").value.trim(),
       document.getElementById("signupEmail").value.trim(),
-      document.getElementById("signupPassword").value
+      document.getElementById("signupPassword").value.trim()
     );
     window.location.href = "dashboard.html";
   } catch (err) { showError(err.message); }
