@@ -1,0 +1,51 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Taskora — Journal</title>
+
+    <!-- Ye script theme blink (FOUC) rokega -->
+  <script>
+    const savedTheme = localStorage.getItem("taskora_theme") || "light";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+  </script>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span class="logo">Taskora</span>
+    <div class="nav-links">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="tasks.html">Tasks</a>
+      <a href="schedule.html">Schedule</a>
+      <a href="journal.html" class="active">Journal</a>
+      <a href="analytics.html">Analytics</a>
+    </div>
+    <button id="themeBtn" class="icon-btn">🌙</button>
+    <button id="logoutBtn" class="link-btn">Logout</button>
+  </nav>
+
+  <main class="container">
+    <h2>My Journal</h2>
+
+    <form id="journalForm" class="journal-form">
+      <input type="text" id="jTitle" placeholder="Entry title..." />
+      <textarea id="jContent" placeholder="Write your thoughts, reflections, wins..." rows="5" required></textarea>
+      <div class="form-row">
+        <select id="jMood">
+          <option value="😊">😊 Happy</option>
+          <option value="😐">😐 Neutral</option>
+          <option value="😔">😔 Sad</option>
+          <option value="🔥">🔥 Motivated</option>
+          <option value="😴">😴 Tired</option>
+        </select>
+        <button type="submit" class="btn primary-btn">Save Entry</button>
+      </div>
+    </form>
+
+    <div id="journalList" class="journal-list"></div>
+  </main>
+
+  <script type="module" src="js/journal.js"></script>
+</body>
+</html>

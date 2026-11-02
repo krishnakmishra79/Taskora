@@ -1,0 +1,48 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Taskora — Schedule</title>
+    <!-- Ye script theme blink (FOUC) rokega -->
+  <script>
+    const savedTheme = localStorage.getItem("taskora_theme") || "light";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+  </script>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span class="logo">Taskora</span>
+    <div class="nav-links">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="tasks.html">Tasks</a>
+      <a href="schedule.html" class="active">Schedule</a>
+      <a href="journal.html">Journal</a>
+      <a href="analytics.html">Analytics</a>
+    </div>
+    <button id="themeBtn" class="icon-btn">🌙</button>
+    <button id="logoutBtn" class="link-btn">Logout</button>
+  </nav>
+
+  <main class="container">
+    <h2>Daily Schedule</h2>
+
+    <form id="scheduleForm" class="form-row">
+      <input type="text" id="title" placeholder="Event title" required />
+      <input type="date" id="date" required />
+      <input type="time" id="time" required />
+      <button class="btn primary-btn" type="submit">Add Event</button>
+    </form>
+
+    <div class="filters">
+      <button id="prevDay" class="chip">← Prev</button>
+      <span id="currentDayLabel" class="day-label"></span>
+      <button id="nextDay" class="chip">Next →</button>
+    </div>
+
+    <ul id="scheduleList" class="task-list"></ul>
+  </main>
+
+  <script type="module" src="js/schedule.js"></script>
+</body>
+</html>

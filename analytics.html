@@ -1,0 +1,65 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Taskora — Analytics</title>
+   
+    <!-- Ye script theme blink (FOUC) rokega -->
+  <script>
+    const savedTheme = localStorage.getItem("taskora_theme") || "light";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+  </script>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <nav class="navbar">
+    <span class="logo">Taskora</span>
+    <div class="nav-links">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="tasks.html">Tasks</a>
+      <a href="schedule.html">Schedule</a>
+      <a href="journal.html">Journal</a>
+      <a href="analytics.html" class="active">Analytics</a>
+    </div>
+    <button id="themeBtn" class="icon-btn">🌙</button>
+    <button id="logoutBtn" class="link-btn">Logout</button>
+  </nav>
+
+  <main class="container">
+    <h2>Productivity Analytics</h2>
+
+    <div class="stats-grid">
+      <div class="stat-card"><h3 id="completionRate">0%</h3><p>Completion Rate</p></div>
+      <div class="stat-card"><h3 id="streak">0</h3><p>Journal Streak (days)</p></div>
+      <div class="stat-card"><h3 id="eventsCount">0</h3><p>Scheduled Events</p></div>
+      <div class="stat-card"><h3 id="journalTotal">0</h3><p>Total Entries</p></div>
+    </div>
+
+    <section class="panel" style="margin-bottom: 20px;">
+      <h3>🔥 Activity Heatmap (Last 30 Days)</h3>
+      <p class="muted" style="margin-bottom: 10px; font-size: 12px;">Darker color = more tasks completed</p>
+      <div id="heatmap" class="heatmap-container"></div>
+    </section>
+
+    <div class="two-col">
+      <section class="panel">
+        <h3>Task Status</h3>
+        <canvas id="statusChart"></canvas>
+      </section>
+      <section class="panel">
+        <h3>Priority Breakdown</h3>
+        <canvas id="priorityChart"></canvas>
+      </section>
+    </div>
+
+    <section class="panel" style="margin-top:20px">
+      <h3>Last 7 Days — Tasks Completed</h3>
+      <canvas id="weekChart"></canvas>
+    </section>
+  </main>
+
+  <script type="module" src="js/analytics.js"></script>
+</body>
+</html>

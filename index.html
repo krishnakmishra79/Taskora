@@ -1,0 +1,44 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Taskora — Login</title>
+    <!-- Ye script theme blink (FOUC) rokega -->
+  <script>
+    const savedTheme = localStorage.getItem("taskora_theme") || "light";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+  </script>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="auth-body">
+  <div class="auth-card">
+    <h1 class="logo">Taskora</h1>
+    <p class="tagline">Your smart productivity companion</p>
+
+    <div class="tabs">
+      <button id="tabLogin" class="tab active">Login</button>
+      <button id="tabSignup" class="tab">Sign Up</button>
+    </div>
+
+    <div id="authError" class="error-box"></div>
+
+    <form id="loginForm">
+      <input type="email" id="loginEmail" placeholder="Email" required />
+      <input type="password" id="loginPassword" placeholder="Password" required />
+      <button type="submit" class="btn primary-btn">Login</button>
+    </form>
+
+    <form id="signupForm" style="display:none">
+      <input type="text" id="signupName" placeholder="Full Name" required />
+      <input type="email" id="signupEmail" placeholder="Email" required />
+      <input type="password" id="signupPassword" placeholder="Password (min 4 chars)" minlength="4" required />
+      <button type="submit" class="btn primary-btn">Create Account</button>
+    </form>
+
+    <p class="hint">Data is stored locally in your browser.</p>
+  </div>
+
+  <script type="module" src="js/auth.js"></script>
+</body>
+</html>

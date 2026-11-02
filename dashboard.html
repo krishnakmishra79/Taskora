@@ -1,0 +1,69 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Taskora — Dashboard</title>
+
+    <!-- Ye script theme blink (FOUC) rokega -->
+  <script>
+    const savedTheme = localStorage.getItem("taskora_theme") || "light";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+  </script>
+
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span class="logo">Taskora</span>
+    <div class="nav-links">
+      <a href="dashboard.html" class="active">Dashboard</a>
+      <a href="tasks.html">Tasks</a>
+      <a href="schedule.html">Schedule</a>
+      <a href="journal.html">Journal</a>
+      <a href="analytics.html">Analytics</a>
+    </div>
+    <button id="themeBtn" class="icon-btn">🌙</button>
+    <button id="logoutBtn" class="link-btn">Logout</button>
+  </nav>
+
+  <main class="container">
+    <h2 id="welcome">Welcome</h2>
+    <p id="dateLine" class="subtitle"></p>
+
+    <div class="stats-grid">
+      <div class="stat-card"><h3 id="totalTasks">0</h3><p>Total Tasks</p></div>
+      <div class="stat-card"><h3 id="doneTasks">0</h3><p>Completed</p></div>
+      <div class="stat-card"><h3 id="pendingTasks">0</h3><p>Pending</p></div>
+      <div class="stat-card"><h3 id="journalCount">0</h3><p>Journal Entries</p></div>
+    </div>
+
+    <div class="two-col">
+      <section class="panel">
+        <h3>⏱️ Pomodoro Focus Timer</h3>
+        <div class="pomodoro">
+          <h1 id="timerDisplay">25:00</h1>
+          <button id="startTimer" class="btn primary-btn" style="width: auto;">Start Focus</button>
+        </div>
+      </section>
+      <section class="panel">
+        <h3>📅 Today's Schedule</h3>
+        <ul id="todaySchedule" class="mini-list"></ul>
+      </section>
+    </div>
+
+    <div class="two-col" style="margin-top: 20px;">
+      <section class="panel">
+        <h3>🎯 Today's Tasks</h3>
+        <ul id="todayTasks" class="mini-list"></ul>
+      </section>
+      <section class="panel">
+        <h3>📝 Recent Journal</h3>
+        <ul id="recentJournal" class="mini-list"></ul>
+      </section>
+    </div>
+  </main>
+
+  <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>

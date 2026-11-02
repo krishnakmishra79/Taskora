@@ -1,0 +1,59 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Taskora — Tasks</title>
+    <!-- Ye script theme blink (FOUC) rokega -->
+  <script>
+    const savedTheme = localStorage.getItem("taskora_theme") || "light";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+  </script>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <span class="logo">Taskora</span>
+    <div class="nav-links">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="tasks.html" class="active">Tasks</a>
+      <a href="schedule.html">Schedule</a>
+      <a href="journal.html">Journal</a>
+      <a href="analytics.html">Analytics</a>
+    </div>
+    <button id="themeBtn" class="icon-btn">🌙</button>
+    <button id="logoutBtn" class="link-btn">Logout</button>
+  </nav>
+
+  <main class="container">
+    <h2>My Tasks</h2>
+
+    <form id="taskForm" class="form-row">
+      <input type="text" id="title" placeholder="Task title" required />
+      <input type="date" id="deadline" />
+      <select id="priority">
+        <option value="low">Low</option>
+        <option value="medium" selected>Medium</option>
+        <option value="high">High</option>
+      </select>
+      <button class="btn primary-btn" type="submit">Add Task</button>
+    </form>
+
+    <div class="filters" style="justify-content: space-between;">
+      <div style="display: flex; gap: 10px;">
+        <button data-filter="all" class="chip active">All</button>
+        <button data-filter="active" class="chip">Active</button>
+        <button data-filter="done" class="chip">Completed</button>
+        <button data-filter="high" class="chip">High Priority</button>
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <input type="text" id="searchInput" class="search-bar" placeholder="🔍 Search tasks..." />
+        <button id="exportBtn" class="chip" title="Download CSV">📤 Export</button>
+      </div>
+    </div>
+
+    <ul id="taskList" class="task-list"></ul>
+  </main>
+
+  <script type="module" src="js/tasks.js"></script>
+</body>
+</html>
